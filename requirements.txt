@@ -1,0 +1,3 @@
+Faker==18.13.0
+Requests~=2.22.0
+flatdict~=4.0.1
