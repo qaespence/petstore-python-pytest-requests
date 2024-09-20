@@ -212,6 +212,31 @@ def clear_log_files():
                     # print(f"Deleted log file: {log_file}")
 
 
+def clear_log_file(suite_name: str):
+    """
+    Finds and deletes the log file for the given suite name in the /logs directory.
+
+    Args:
+        suite_name (str): The name of the test suite whose log file should be cleared.
+    """
+    log_dir = os.path.join('..', 'logs')
+
+    # Create the directory if it doesn't exist
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+        print(f"Created log directory: {log_dir}")
+    else:
+        # Build the expected log file name
+        log_file = os.path.join(log_dir, f"{suite_name}.log")
+
+        # Check if the log file exists and delete it
+        if os.path.isfile(log_file):
+            os.remove(log_file)
+            print(f"Deleted log file: {log_file}")
+        else:
+            print(f"No log file found for suite: {suite_name}")
+
+
 # Setup logging (can also log to file if needed)
 logging.basicConfig(level=logging.INFO)
 
@@ -346,3 +371,7 @@ def schema_validation(service, endpoint, method, response=None, payload_must_mat
         return f"\n{''.join(results)}\nThere are {len(results)} mismatches!\n"
     else:
         return "No mismatch values"
+
+
+def string_gen(length: int):
+    return "".join(random.choice(string.ascii_lowercase) for _ in range(length))
