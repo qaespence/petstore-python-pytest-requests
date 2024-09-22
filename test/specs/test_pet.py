@@ -54,10 +54,10 @@ def test_add_pet():
                             [
                                 f'"id":{test_data["id"]}',
                                 f'"name":"{test_data["name"]}"',
-                                f'"category":{{"id":{test_data["category"]["id"]},'
+                                f'"category":{{"id":{test_data["category"]["id"]}',
                                 f'"name":"{test_data["category"]["name"]}"}}',
-                                '"photoUrls"',
-                                '"tags"',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
                                 f'"status":"{test_data["status"]}"'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -143,10 +143,10 @@ def test_add_pet_with_id_missing():
                             200,
                             [
                                 f'"name":"{test_data["name"]}"',
-                                f'"category":{{"id":{test_data["category"]["id"]},'
+                                f'"category":{{"id":{test_data["category"]["id"]}',
                                 f'"name":"{test_data["category"]["name"]}"}}',
-                                '"photoUrls"',
-                                '"tags"',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
                                 f'"status":"{test_data["status"]}"'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -241,10 +241,10 @@ def test_add_pet_with_id_invalid_negative_one():
                             200,
                             [
                                 f'"name":"{test_data["name"]}"',
-                                f'"category":{{"id":{test_data["category"]["id"]},'
+                                f'"category":{{"id":{test_data["category"]["id"]}',
                                 f'"name":"{test_data["category"]["name"]}"}}',
-                                '"photoUrls"',
-                                '"tags"',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
                                 f'"status":"{test_data["status"]}"'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -294,10 +294,10 @@ def test_add_pet_with_id_null():
                             200,
                             [
                                 f'"name":"{test_data["name"]}"',
-                                f'"category":{{"id":{test_data["category"]["id"]},'
+                                f'"category":{{"id":{test_data["category"]["id"]}',
                                 f'"name":"{test_data["category"]["name"]}"}}',
-                                '"photoUrls"',
-                                '"tags"',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
                                 f'"status":"{test_data["status"]}"'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -335,10 +335,10 @@ def test_add_pet_with_name_with_spaces():
                             [
                                 f'"id":{test_data["id"]}',
                                 f'"name":"{test_data["name"]}"',
-                                f'"category":{{"id":{test_data["category"]["id"]},'
+                                f'"category":{{"id":{test_data["category"]["id"]}',
                                 f'"name":"{test_data["category"]["name"]}"}}',
-                                '"photoUrls"',
-                                '"tags"',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
                                 f'"status":"{test_data["status"]}"'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -376,10 +376,10 @@ def test_add_pet_with_name_empty_string():
                             [
                                 f'"id":{test_data["id"]}',
                                 f'"name":"{test_data["name"]}"',
-                                f'"category":{{"id":{test_data["category"]["id"]},'
+                                f'"category":{{"id":{test_data["category"]["id"]}',
                                 f'"name":"{test_data["category"]["name"]}"}}',
-                                '"photoUrls"',
-                                '"tags"',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
                                 f'"status":"{test_data["status"]}"'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -414,10 +414,10 @@ def test_add_pet_with_name_missing():
                             200,
                             [
                                 f'"id":{test_data["id"]}',
-                                f'"category":{{"id":{test_data["category"]["id"]},'
+                                f'"category":{{"id":{test_data["category"]["id"]}',
                                 f'"name":"{test_data["category"]["name"]}"}}',
-                                '"photoUrls"',
-                                '"tags"',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
                                 f'"status":"{test_data["status"]}"'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -455,10 +455,10 @@ def test_add_pet_with_name_invalid_data_type():
                             [
                                 f'"id":{test_data["id"]}',
                                 f'"name":"{test_data["name"]}"',
-                                f'"category":{{"id":{test_data["category"]["id"]},'
+                                f'"category":{{"id":{test_data["category"]["id"]}',
                                 f'"name":"{test_data["category"]["name"]}"}}',
-                                '"photoUrls"',
-                                '"tags"',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
                                 f'"status":"{test_data["status"]}"'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -496,10 +496,10 @@ def test_add_pet_with_name_over_1024_chars():
                             [
                                 f'"id":{test_data["id"]}',
                                 f'"name":"{test_data["name"]}"',
-                                f'"category":{{"id":{test_data["category"]["id"]},'
+                                f'"category":{{"id":{test_data["category"]["id"]}',
                                 f'"name":"{test_data["category"]["name"]}"}}',
-                                '"photoUrls"',
-                                '"tags"',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
                                 f'"status":"{test_data["status"]}"'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -536,10 +536,10 @@ def test_add_pet_with_name_null():
                             200,
                             [
                                 f'"id":{test_data["id"]}',
-                                f'"category":{{"id":{test_data["category"]["id"]},'
+                                f'"category":{{"id":{test_data["category"]["id"]}',
                                 f'"name":"{test_data["category"]["name"]}"}}',
-                                '"photoUrls"',
-                                '"tags"',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
                                 f'"status":"{test_data["status"]}"'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -577,10 +577,10 @@ def test_add_pet_with_category_id_missing():
                             [
                                 f'"id":{test_data["id"]}',
                                 f'"name":"{test_data["name"]}"',
-                                f'"category":{{"id":0,'
+                                f'"category":{{"id":0',
                                 f'"name":"{test_data["category"]["name"]}"}}',
-                                '"photoUrls"',
-                                '"tags"',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
                                 f'"status":"{test_data["status"]}"'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -650,10 +650,10 @@ def test_add_pet_with_category_id_invalid_negative_one():
                             [
                                 f'"id":{test_data["id"]}',
                                 f'"name":"{test_data["name"]}"',
-                                f'"category":{{"id":{test_data["category"]["id"]},'
+                                f'"category":{{"id":{test_data["category"]["id"]}',
                                 f'"name":"{test_data["category"]["name"]}"}}',
-                                '"photoUrls"',
-                                '"tags"',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
                                 f'"status":"{test_data["status"]}"'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -691,10 +691,10 @@ def test_add_pet_with_category_id_null():
                             [
                                 f'"id":{test_data["id"]}',
                                 f'"name":"{test_data["name"]}"',
-                                f'"category":{{"id":0,'
+                                f'"category":{{"id":0',
                                 f'"name":"{test_data["category"]["name"]}"}}',
-                                '"photoUrls"',
-                                '"tags"',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
                                 f'"status":"{test_data["status"]}"'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -732,10 +732,10 @@ def test_add_pet_with_category_name_with_spaces():
                             [
                                 f'"id":{test_data["id"]}',
                                 f'"name":"{test_data["name"]}"',
-                                f'"category":{{"id":{test_data["category"]["id"]},'
+                                f'"category":{{"id":{test_data["category"]["id"]}',
                                 f'"name":"{test_data["category"]["name"]}"}}',
-                                '"photoUrls"',
-                                '"tags"',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
                                 f'"status":"{test_data["status"]}"'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -773,10 +773,10 @@ def test_add_pet_with_category_name_empty_string():
                             [
                                 f'"id":{test_data["id"]}',
                                 f'"name":"{test_data["name"]}"',
-                                f'"category":{{"id":{test_data["category"]["id"]},'
+                                f'"category":{{"id":{test_data["category"]["id"]}',
                                 f'"name":"{test_data["category"]["name"]}"}}',
-                                '"photoUrls"',
-                                '"tags"',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
                                 f'"status":"{test_data["status"]}"'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -815,8 +815,8 @@ def test_add_pet_with_category_name_missing():
                                 f'"id":{test_data["id"]}',
                                 f'"name":"{test_data["name"]}"',
                                 f'"category":{{"id":{test_data["category"]["id"]}',
-                                '"photoUrls"',
-                                '"tags"',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
                                 f'"status":"{test_data["status"]}"'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -854,10 +854,10 @@ def test_add_pet_with_category_name_invalid_data_type():
                             [
                                 f'"id":{test_data["id"]}',
                                 f'"name":"{test_data["name"]}"',
-                                f'"category":{{"id":{test_data["category"]["id"]},'
+                                f'"category":{{"id":{test_data["category"]["id"]}',
                                 f'"name":"{test_data["category"]["name"]}"}}',
-                                '"photoUrls"',
-                                '"tags"',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
                                 f'"status":"{test_data["status"]}"'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -895,10 +895,10 @@ def test_add_pet_with_category_name_over_1024_chars():
                             [
                                 f'"id":{test_data["id"]}',
                                 f'"name":"{test_data["name"]}"',
-                                f'"category":{{"id":{test_data["category"]["id"]},'
+                                f'"category":{{"id":{test_data["category"]["id"]}',
                                 f'"name":"{test_data["category"]["name"]}"}}',
-                                '"photoUrls"',
-                                '"tags"',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
                                 f'"status":"{test_data["status"]}"'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -937,8 +937,366 @@ def test_add_pet_with_category_name_null():
                                 f'"id":{test_data["id"]}',
                                 f'"name":"{test_data["name"]}"',
                                 f'"category":{{"id":{test_data["category"]["id"]}',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
+                                f'"status":"{test_data["status"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_pet_with_photo_urls_1_valid():
+    # Generate random pet data
+    test_data = generate_random_pet_data()
+    test_data["photoUrls"] = ["http://test.com/photo1.jpg"]
+
+    # Perform a POST request to add a new pet
+    payload = {
+        "id": test_data["id"],
+        "category": test_data["category"],
+        "name": test_data["name"],
+        "status": test_data["status"],
+        "photoUrls": test_data["photoUrls"],
+        "tags": test_data["tags"]
+    }
+    response = post("/v2/pet", payload, {"content-type": "application/json"})
+    pet = json.loads(response.text)
+
+    # Store the created pet ID for cleanup
+    created_pet_ids.append(pet['id'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{test_data["id"]}',
+                                f'"name":"{test_data["name"]}"',
+                                f'"category":{{"id":{test_data["category"]["id"]}',
+                                f'"name":"{test_data["category"]["name"]}"}}',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
+                                f'"status":"{test_data["status"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_pet_with_photo_urls_2_valid():
+    # Generate random pet data
+    test_data = generate_random_pet_data()
+    test_data["photoUrls"] = ["http://test.com/photo1.jpg", "http://test.com/photo2.jpg"]
+
+    # Perform a POST request to add a new pet
+    payload = {
+        "id": test_data["id"],
+        "category": test_data["category"],
+        "name": test_data["name"],
+        "status": test_data["status"],
+        "photoUrls": test_data["photoUrls"],
+        "tags": test_data["tags"]
+    }
+    response = post("/v2/pet", payload, {"content-type": "application/json"})
+    pet = json.loads(response.text)
+
+    # Store the created pet ID for cleanup
+    created_pet_ids.append(pet['id'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{test_data["id"]}',
+                                f'"name":"{test_data["name"]}"',
+                                f'"category":{{"id":{test_data["category"]["id"]}',
+                                f'"name":"{test_data["category"]["name"]}"}}',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                f'{test_data["photoUrls"][1]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
+                                f'"status":"{test_data["status"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_pet_with_photo_urls_same_twice():
+    # Generate random pet data
+    test_data = generate_random_pet_data()
+    test_data["photoUrls"] = ["http://test.com/photo1.jpg", "http://test.com/photo1.jpg"]
+
+    # Perform a POST request to add a new pet
+    payload = {
+        "id": test_data["id"],
+        "category": test_data["category"],
+        "name": test_data["name"],
+        "status": test_data["status"],
+        "photoUrls": test_data["photoUrls"],
+        "tags": test_data["tags"]
+    }
+    response = post("/v2/pet", payload, {"content-type": "application/json"})
+    pet = json.loads(response.text)
+
+    # Store the created pet ID for cleanup
+    created_pet_ids.append(pet['id'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{test_data["id"]}',
+                                f'"name":"{test_data["name"]}"',
+                                f'"category":{{"id":{test_data["category"]["id"]}',
+                                f'"name":"{test_data["category"]["name"]}"}}',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
+                                f'"status":"{test_data["status"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+    
+
+def test_add_pet_with_photo_urls_1_invalid():
+    # Generate random pet data
+    test_data = generate_random_pet_data()
+    test_data["photoUrls"] = ["not-a-url"]
+
+    # Perform a POST request to add a new pet
+    payload = {
+        "id": test_data["id"],
+        "category": test_data["category"],
+        "name": test_data["name"],
+        "status": test_data["status"],
+        "photoUrls": test_data["photoUrls"],
+        "tags": test_data["tags"]
+    }
+    response = post("/v2/pet", payload, {"content-type": "application/json"})
+    pet = json.loads(response.text)
+
+    # Store the created pet ID for cleanup
+    created_pet_ids.append(pet['id'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{test_data["id"]}',
+                                f'"name":"{test_data["name"]}"',
+                                f'"category":{{"id":{test_data["category"]["id"]}',
+                                f'"name":"{test_data["category"]["name"]}"}}',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
+                                f'"status":"{test_data["status"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_pet_with_photo_urls_a_mix_of_valid_and_invalid():
+    # Generate random pet data
+    test_data = generate_random_pet_data()
+    test_data["photoUrls"] = ["http://test.com/photo1.jpg", "not-a-url"]
+
+    # Perform a POST request to add a new pet
+    payload = {
+        "id": test_data["id"],
+        "category": test_data["category"],
+        "name": test_data["name"],
+        "status": test_data["status"],
+        "photoUrls": test_data["photoUrls"],
+        "tags": test_data["tags"]
+    }
+    response = post("/v2/pet", payload, {"content-type": "application/json"})
+    pet = json.loads(response.text)
+
+    # Store the created pet ID for cleanup
+    created_pet_ids.append(pet['id'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{test_data["id"]}',
+                                f'"name":"{test_data["name"]}"',
+                                f'"category":{{"id":{test_data["category"]["id"]}',
+                                f'"name":"{test_data["category"]["name"]}"}}',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
+                                f'"status":"{test_data["status"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_pet_with_photo_urls_missing():
+    # Generate random pet data
+    test_data = generate_random_pet_data()
+    del test_data["photoUrls"]
+
+    # Perform a POST request to add a new pet
+    payload = {
+        "id": test_data["id"],
+        "category": test_data["category"],
+        "name": test_data["name"],
+        "status": test_data["status"],
+        "tags": test_data["tags"]
+    }
+    response = post("/v2/pet", payload, {"content-type": "application/json"})
+    pet = json.loads(response.text)
+
+    # Store the created pet ID for cleanup
+    created_pet_ids.append(pet['id'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{test_data["id"]}',
+                                f'"name":"{test_data["name"]}"',
+                                f'"category":{{"id":{test_data["category"]["id"]}',
+                                f'"name":"{test_data["category"]["name"]}"}}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
+                                f'"status":"{test_data["status"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_pet_with_photo_urls_invalid_data_type():
+    # Generate random pet data
+    test_data = generate_random_pet_data()
+    test_data["photoUrls"] = 123
+
+    # Perform a POST request to add a new pet
+    payload = {
+        "id": test_data["id"],
+        "category": test_data["category"],
+        "name": test_data["name"],
+        "status": test_data["status"],
+        "photoUrls": test_data["photoUrls"],
+        "tags": test_data["tags"]
+    }
+    response = post("/v2/pet", payload, {"content-type": "application/json"})
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            500,
+                            [
+                                '"code":500', '"type":"unknown"',
+                                '"message":"something bad happened"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_pet_with_photo_urls_empty_list():
+    # Generate random pet data
+    test_data = generate_random_pet_data()
+    test_data["photoUrls"] = []
+
+    # Perform a POST request to add a new pet
+    payload = {
+        "id": test_data["id"],
+        "category": test_data["category"],
+        "name": test_data["name"],
+        "status": test_data["status"],
+        "photoUrls": test_data["photoUrls"],
+        "tags": test_data["tags"]
+    }
+    response = post("/v2/pet", payload, {"content-type": "application/json"})
+    pet = json.loads(response.text)
+
+    # Store the created pet ID for cleanup
+    created_pet_ids.append(pet['id'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{test_data["id"]}',
+                                f'"name":"{test_data["name"]}"',
+                                f'"category":{{"id":{test_data["category"]["id"]}',
+                                f'"name":"{test_data["category"]["name"]}"}}',
                                 '"photoUrls"',
-                                '"tags"',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
+                                f'"status":"{test_data["status"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_pet_with_photo_urls_null():
+    # Generate random pet data
+    test_data = generate_random_pet_data()
+    test_data["photoUrls"] = None
+
+    # Perform a POST request to add a new pet
+    payload = {
+        "id": test_data["id"],
+        "category": test_data["category"],
+        "name": test_data["name"],
+        "status": test_data["status"],
+        "photoUrls": test_data["photoUrls"],
+        "tags": test_data["tags"]
+    }
+    response = post("/v2/pet", payload, {"content-type": "application/json"})
+    pet = json.loads(response.text)
+
+    # Store the created pet ID for cleanup
+    created_pet_ids.append(pet['id'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{test_data["id"]}',
+                                f'"name":"{test_data["name"]}"',
+                                f'"category":{{"id":{test_data["category"]["id"]}',
+                                f'"name":"{test_data["category"]["name"]}"}}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
                                 f'"status":"{test_data["status"]}"'
                             ], None,
                             ['"Content-Type": "application/json"',
