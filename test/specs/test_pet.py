@@ -1,7 +1,7 @@
 from test.helpers.utils import (generate_random_pet_data, set_debug_file_name,
                                 api_test, clear_log_file, schema_validation,
                                 string_gen)
-from test.api.basic_requests import post, delete
+from test.api.basic_requests import post, delete, get
 import json
 
 created_pet_ids = []
@@ -1993,6 +1993,97 @@ def test_add_pet_with_status_null():
     assert test_results == "No mismatch values"
 
 
+#
+# GET /pet/:pet_id tests
+#
+def create_test_pet():
+    # Generate random pet data
+    test_data = generate_random_pet_data()
+
+    # Perform a POST request to add a new pet
+    payload = {
+        "id": test_data["id"],
+        "category": test_data["category"],
+        "name": test_data["name"],
+        "status": test_data["status"],
+        "photoUrls": test_data["photoUrls"],
+        "tags": test_data["tags"]
+    }
+    response = post("/v2/pet", payload, {"content-type": "application/json"})
+    pet = json.loads(response.text)
+
+    # Store the created pet ID for cleanup
+    created_pet_ids.append(pet['id'])
+    test_data["token"] = pet['id']
+
+    return test_data
+
+
+def test_fetch_pet():
+    # Generate random pet
+    test_data = create_test_pet()
+
+    # Fetch pet
+    response = get(f'/v2/pet/{test_data["token"]}')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{test_data["id"]}',
+                                f'"name":"{test_data["name"]}"',
+                                f'"category":{{"id":{test_data["category"]["id"]}',
+                                f'"name":"{test_data["category"]["name"]}"}}',
+                                '"photoUrls"', f'{test_data["photoUrls"][0]}',
+                                '"tags"', f'{test_data["tags"][0]["id"]}', f'{test_data["tags"][0]["name"]}',
+                                f'"status":"{test_data["status"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_fetch_pet_schema():
+    # Generate random pet
+    test_data = create_test_pet()
+
+    # Fetch pet
+    response = get(f'/v2/pet/{test_data["token"]}')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = schema_validation("pet", "/v2/pet/:pet_id", "GET",
+                                     response, False, True)
+    assert test_results == "No mismatch values"
+
+
+def test_fetch_pet_with_bad_token():
+    # Fetch pet
+    response = get('/v2/pet/bad')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            404,
+                            [
+                                '"type":"unknown"',
+                                '"message":"java.lang.NumberFormatException: For input string',
+                                'bad'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+#
+# Pet Clean-up
+#
 def test_cleanup_created_pets():
     print(f"\n\nPost suite pet cleanup...")
     for pet_id in created_pet_ids:
