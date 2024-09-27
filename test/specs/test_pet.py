@@ -2082,6 +2082,67 @@ def test_fetch_pet_with_bad_token():
 
 
 #
+# DELETE /pet/:pet_id tests
+#
+def test_delete_pet():
+    # Generate random pet
+    test_data = create_test_pet()
+
+    # Fetch pet
+    response = delete(f'/v2/pet/{test_data["token"]}')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                '"code":200',
+                                '"type":"unknown"',
+                                f'"message":"{test_data["token"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_delete_pet_schema():
+    # Generate random pet
+    test_data = create_test_pet()
+
+    # Fetch pet
+    response = delete(f'/v2/pet/{test_data["token"]}')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = schema_validation("pet", "/v2/pet/:pet_id", "DELETE",
+                                     response, False, True)
+    assert test_results == "No mismatch values"
+
+
+def test_delete_pet_with_bad_token():
+    # Fetch pet
+    response = delete('/v2/pet/bad')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            404,
+                            [
+                                '"type":"unknown"',
+                                '"message":"java.lang.NumberFormatException: For input string',
+                                'bad'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+#
 # Pet Clean-up
 #
 def test_cleanup_created_pets():

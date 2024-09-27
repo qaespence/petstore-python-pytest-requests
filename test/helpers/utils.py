@@ -200,7 +200,7 @@ def clear_log_files():
     # Create the directory if it doesn't exist
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
-        print(f"Created log directory: {log_dir}")
+        # print(f"Created log directory: {log_dir}")
     else:
         # Iterate over all files in the directory
         for file_name in os.listdir(log_dir):
@@ -232,7 +232,7 @@ def clear_log_file(suite_name: str):
         # Check if the log file exists and delete it
         if os.path.isfile(log_file):
             os.remove(log_file)
-            print(f"Deleted log file: {log_file}")
+            # print(f"Deleted log file: {log_file}")
         else:
             print(f"No log file found for suite: {suite_name}")
 
