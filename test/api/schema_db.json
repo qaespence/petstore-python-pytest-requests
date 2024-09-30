@@ -12,6 +12,27 @@
                     "status": "str"
                 },
                 "headers": {
+                    "Date": "str",
+                    "Content-Type": "str",
+                    "Transfer-Encoding": "str",
+                    "Connection": "str",
+                    "Access-Control-Allow-Origin": "str",
+                    "Access-Control-Allow-Methods": "str",
+                    "Access-Control-Allow-Headers": "str",
+                    "Server": "str"
+                }
+            },
+            "PUT": {
+                "body": {
+                    "id": "int",
+                    "category.id": "int",
+                    "category.name": "str",
+                    "name": "str",
+                    "photoUrls": "list",
+                    "tags": "list",
+                    "status": "str"
+                },
+                "headers": {
                       "Date": "str",
                       "Content-Type": "str",
                       "Transfer-Encoding": "str",
@@ -35,14 +56,14 @@
                     "status": "str"
                 },
                 "headers": {
-                      "Date": "str",
-                      "Content-Type": "str",
-                      "Transfer-Encoding": "str",
-                      "Connection": "str",
-                      "Access-Control-Allow-Origin": "str",
-                      "Access-Control-Allow-Methods": "str",
-                      "Access-Control-Allow-Headers": "str",
-                      "Server": "str"
+                    "Date": "str",
+                    "Content-Type": "str",
+                    "Transfer-Encoding": "str",
+                    "Connection": "str",
+                    "Access-Control-Allow-Origin": "str",
+                    "Access-Control-Allow-Methods": "str",
+                    "Access-Control-Allow-Headers": "str",
+                    "Server": "str"
                 }
             },
             "DELETE": {
@@ -52,14 +73,14 @@
                     "message": "str"
                 },
                 "headers": {
-                      "Date": "str",
-                      "Content-Type": "str",
-                      "Transfer-Encoding": "str",
-                      "Connection": "str",
-                      "Access-Control-Allow-Origin": "str",
-                      "Access-Control-Allow-Methods": "str",
-                      "Access-Control-Allow-Headers": "str",
-                      "Server": "str"
+                    "Date": "str",
+                    "Content-Type": "str",
+                    "Transfer-Encoding": "str",
+                    "Connection": "str",
+                    "Access-Control-Allow-Origin": "str",
+                    "Access-Control-Allow-Methods": "str",
+                    "Access-Control-Allow-Headers": "str",
+                    "Server": "str"
                 }
             }
         }
