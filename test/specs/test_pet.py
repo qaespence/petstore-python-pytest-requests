@@ -2337,9 +2337,6 @@ def test_update_pet_put_json_category_name_missing():
     # Generate random pet
     old_test_data = create_test_pet()
 
-    # Generate updated random pet data
-    test_data = generate_random_pet_data()
-
     # Perform a PUT request to update the pet
     payload = {
         "id": old_test_data["token"],
@@ -2375,9 +2372,6 @@ def test_update_pet_put_json_category_name_missing():
 def test_update_pet_put_json_category_name_invalid_data_type():
     # Generate random pet
     old_test_data = create_test_pet()
-
-    # Generate updated random pet data
-    test_data = generate_random_pet_data()
 
     # Perform a PUT request to update the pet
     payload = {
@@ -2415,9 +2409,6 @@ def test_update_pet_put_json_category_name_invalid_data_type():
 def test_update_pet_put_json_category_name_null():
     # Generate random pet
     old_test_data = create_test_pet()
-
-    # Generate updated random pet data
-    test_data = generate_random_pet_data()
 
     # Perform a PUT request to update the pet
     payload = {
@@ -2555,6 +2546,154 @@ def test_update_pet_put_json_name_valid():
                             [
                                 f'"id":{old_test_data["token"]}',
                                 f'"name":"{test_data["name"]}"',
+                                f'"category":{{"id":{old_test_data["category"]["id"]}',
+                                f'"name":"{old_test_data["category"]["name"]}"}}',
+                                '"photoUrls"', f'{old_test_data["photoUrls"][0]}',
+                                '"tags"', f'{old_test_data["tags"][0]["id"]}',
+                                f'{old_test_data["tags"][0]["name"]}',
+                                f'"status":"{old_test_data["status"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_update_pet_put_json_name_missing():
+    # Generate random pet
+    old_test_data = create_test_pet()
+
+    # Perform a PUT request to update the pet
+    payload = {
+        "id": old_test_data["token"],
+        "category": old_test_data["category"],
+        "status": old_test_data["status"],
+        "photoUrls": old_test_data["photoUrls"],
+        "tags": old_test_data["tags"]
+    }
+    response = put("/v2/pet", payload, {"content-type": "application/json"})
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{old_test_data["token"]}',
+                                f'"category":{{"id":{old_test_data["category"]["id"]}',
+                                f'"name":"{old_test_data["category"]["name"]}"}}',
+                                '"photoUrls"', f'{old_test_data["photoUrls"][0]}',
+                                '"tags"', f'{old_test_data["tags"][0]["id"]}',
+                                f'{old_test_data["tags"][0]["name"]}',
+                                f'"status":"{old_test_data["status"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_update_pet_put_json_name_invalid_data_type():
+    # Generate random pet
+    old_test_data = create_test_pet()
+
+    # Perform a PUT request to update the pet
+    payload = {
+        "id": old_test_data["token"],
+        "category": old_test_data["category"],
+        "name": 123,
+        "status": old_test_data["status"],
+        "photoUrls": old_test_data["photoUrls"],
+        "tags": old_test_data["tags"]
+    }
+    response = put("/v2/pet", payload, {"content-type": "application/json"})
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{old_test_data["token"]}',
+                                f'"name":"123"',
+                                f'"category":{{"id":{old_test_data["category"]["id"]}',
+                                f'"name":"{old_test_data["category"]["name"]}"}}',
+                                '"photoUrls"', f'{old_test_data["photoUrls"][0]}',
+                                '"tags"', f'{old_test_data["tags"][0]["id"]}',
+                                f'{old_test_data["tags"][0]["name"]}',
+                                f'"status":"{old_test_data["status"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_update_pet_put_json_name_over_1024_chars():
+    # Generate random pet
+    old_test_data = create_test_pet()
+
+    # Generate long name
+    new_name = string_gen(1025)
+
+    # Perform a PUT request to update the pet
+    payload = {
+        "id": old_test_data["token"],
+        "category": old_test_data["category"],
+        "name": new_name,
+        "status": old_test_data["status"],
+        "photoUrls": old_test_data["photoUrls"],
+        "tags": old_test_data["tags"]
+    }
+    response = put("/v2/pet", payload, {"content-type": "application/json"})
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{old_test_data["token"]}',
+                                f'"name":"{new_name}"',
+                                f'"category":{{"id":{old_test_data["category"]["id"]}',
+                                f'"name":"{old_test_data["category"]["name"]}"}}',
+                                '"photoUrls"', f'{old_test_data["photoUrls"][0]}',
+                                '"tags"', f'{old_test_data["tags"][0]["id"]}',
+                                f'{old_test_data["tags"][0]["name"]}',
+                                f'"status":"{old_test_data["status"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_update_pet_put_json_name_null():
+    # Generate random pet
+    old_test_data = create_test_pet()
+
+    # Perform a PUT request to update the pet
+    payload = {
+        "id": old_test_data["token"],
+        "category": old_test_data["category"],
+        "name": None,
+        "status": old_test_data["status"],
+        "photoUrls": old_test_data["photoUrls"],
+        "tags": old_test_data["tags"]
+    }
+    response = put("/v2/pet", payload, {"content-type": "application/json"})
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{old_test_data["token"]}',
                                 f'"category":{{"id":{old_test_data["category"]["id"]}',
                                 f'"name":"{old_test_data["category"]["name"]}"}}',
                                 '"photoUrls"', f'{old_test_data["photoUrls"][0]}',
