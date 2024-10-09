@@ -4,7 +4,8 @@ from test.helpers.utils import api_logger
 from datetime import datetime
 
 
-def post(endpoint: str, payload: dict = None, headers: dict = None, files: dict = None):
+def post(endpoint: str, payload: dict = None, headers: dict = None, files: dict = None,
+         form_data: dict = None):
     """
     Sends a POST request to the specified endpoint with the given payload and headers.
 
@@ -13,6 +14,7 @@ def post(endpoint: str, payload: dict = None, headers: dict = None, files: dict 
         payload (dict): (optional) The data to be sent in the body of the request.
         headers (dict): (optional) The headers to include in the request.
         files (dict): (optional) The files to include in the request.
+        form_data (dict): (optional) Form data payload
 
     Returns:
         response: The response object returned by the requests library.
@@ -22,7 +24,9 @@ def post(endpoint: str, payload: dict = None, headers: dict = None, files: dict 
     url = f"{config['base_url']}{endpoint}"
 
     # Decide whether to include json or data in the request
-    if payload and not files:
+    if form_data:
+        response = requests.post(url, data=form_data, headers=headers)
+    elif payload and not files:
         response = requests.post(url, json=payload, headers=headers)
     elif files:
         response = requests.post(url, files=files, headers=headers, data=payload)

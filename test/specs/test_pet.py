@@ -3303,6 +3303,383 @@ def test_update_pet_put_json_id_non_existing():
 
 
 #
+# POST /pet/:pet_id tests
+#
+def test_update_pet_post_form_all_fields_valid():
+    # Generate random pet
+    test_data = create_test_pet()
+
+    # Generate updated random pet data
+    new_test_data = generate_random_pet_data()
+
+    # Perform a POST request to update the pet
+    payload = {
+        "name": new_test_data["name"],
+        "status": "pending"
+    }
+    response = post(f'/v2/pet/{test_data["token"]}', None,
+                    {"content-type": "application/x-www-form-urlencoded"}, None,
+                    payload)
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                '"code":200',
+                                '"type":"unknown"',
+                                f'"message":"{test_data["token"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_update_pet_schema_post_form():
+    # Generate random pet
+    test_data = create_test_pet()
+
+    # Generate updated random pet data
+    new_test_data = generate_random_pet_data()
+
+    # Perform a POST request to update the pet
+    payload = {
+        "name": new_test_data["name"],
+        "status": "pending"
+    }
+    response = post(f'/v2/pet/{test_data["token"]}', None,
+                    {"content-type": "application/x-www-form-urlencoded"}, None,
+                    payload)
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = schema_validation("pet", "/v2/pet/:pet_id", "POST",
+                                     response, False, True)
+    assert test_results == "No mismatch values"
+
+
+def test_update_pet_post_form_name_missing():
+    # Generate random pet
+    test_data = create_test_pet()
+
+    # Perform a POST request to update the pet
+    payload = {
+        "status": "pending"
+    }
+    response = post(f'/v2/pet/{test_data["token"]}', None,
+                    {"content-type": "application/x-www-form-urlencoded"}, None,
+                    payload)
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                '"code":200',
+                                '"type":"unknown"',
+                                f'"message":"{test_data["token"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_update_pet_post_form_name_over_1024_chars():
+    # Generate random pet
+    test_data = create_test_pet()
+
+    # Perform a POST request to update the pet
+    payload = {
+        "name": string_gen(1025),
+        "status": "pending"
+    }
+    response = post(f'/v2/pet/{test_data["token"]}', None,
+                    {"content-type": "application/x-www-form-urlencoded"}, None,
+                    payload)
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                '"code":200',
+                                '"type":"unknown"',
+                                f'"message":"{test_data["token"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_update_pet_post_form_name_invalid_data_type():
+    # Generate random pet
+    test_data = create_test_pet()
+
+    # Perform a POST request to update the pet
+    payload = {
+        "name": 123,
+        "status": "pending"
+    }
+    response = post(f'/v2/pet/{test_data["token"]}', None,
+                    {"content-type": "application/x-www-form-urlencoded"}, None,
+                    payload)
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                '"code":200',
+                                '"type":"unknown"',
+                                f'"message":"{test_data["token"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_update_pet_post_form_name_null():
+    # Generate random pet
+    test_data = create_test_pet()
+
+    # Perform a POST request to update the pet
+    payload = {
+        "name": None,
+        "status": "pending"
+    }
+    response = post(f'/v2/pet/{test_data["token"]}', None,
+                    {"content-type": "application/x-www-form-urlencoded"}, None,
+                    payload)
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                '"code":200',
+                                '"type":"unknown"',
+                                f'"message":"{test_data["token"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_update_pet_post_form_status_missing():
+    # Generate random pet
+    test_data = create_test_pet()
+
+    # Generate updated random pet data
+    new_test_data = generate_random_pet_data()
+
+    # Perform a POST request to update the pet
+    payload = {
+        "name": new_test_data["name"]
+    }
+    response = post(f'/v2/pet/{test_data["token"]}', None,
+                    {"content-type": "application/x-www-form-urlencoded"}, None,
+                    payload)
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                '"code":200',
+                                '"type":"unknown"',
+                                f'"message":"{test_data["token"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_update_pet_post_form_status_unsupported():
+    # Generate random pet
+    test_data = create_test_pet()
+
+    # Generate updated random pet data
+    new_test_data = generate_random_pet_data()
+
+    # Perform a POST request to update the pet
+    payload = {
+        "name": new_test_data["name"],
+        "status": "unsupported"
+    }
+    response = post(f'/v2/pet/{test_data["token"]}', None,
+                    {"content-type": "application/x-www-form-urlencoded"}, None,
+                    payload)
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                '"code":200',
+                                '"type":"unknown"',
+                                f'"message":"{test_data["token"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_update_pet_post_form_status_invalid_data_type():
+    # Generate random pet
+    test_data = create_test_pet()
+
+    # Generate updated random pet data
+    new_test_data = generate_random_pet_data()
+
+    # Perform a POST request to update the pet
+    payload = {
+        "name": new_test_data["name"],
+        "status": 123
+    }
+    response = post(f'/v2/pet/{test_data["token"]}', None,
+                    {"content-type": "application/x-www-form-urlencoded"}, None,
+                    payload)
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                '"code":200',
+                                '"type":"unknown"',
+                                f'"message":"{test_data["token"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_update_pet_post_form_status_null():
+    # Generate random pet
+    test_data = create_test_pet()
+
+    # Generate updated random pet data
+    new_test_data = generate_random_pet_data()
+
+    # Perform a POST request to update the pet
+    payload = {
+        "name": new_test_data["name"],
+        "status": None
+    }
+    response = post(f'/v2/pet/{test_data["token"]}', None,
+                    {"content-type": "application/x-www-form-urlencoded"}, None,
+                    payload)
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                '"code":200',
+                                '"type":"unknown"',
+                                f'"message":"{test_data["token"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_update_pet_post_form_id_bad():
+    # Generate updated random pet data
+    new_test_data = generate_random_pet_data()
+
+    # Perform a POST request to update the pet
+    payload = {
+        "name": new_test_data["name"],
+        "status": "pending"
+    }
+    response = post(f'/v2/pet/bad', None,
+                    {"content-type": "application/x-www-form-urlencoded"}, None,
+                    payload)
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            404,
+                            [
+                                '"code":404',
+                                '"type":"unknown"',
+                                f'"message":"java.lang.NumberFormatException: For input string:'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_update_pet_post_form_id_non_existing():
+    # Find a non-existing pet ID
+    bad_id = -1
+    for i in range(1, 10):
+        test_id = random.randint(1, 10000)
+        response = get(f'/v2/pet/{test_id}')
+        if response.status_code == 404:
+            bad_id = test_id
+            break
+
+    # Generate updated random pet data
+    new_test_data = generate_random_pet_data()
+
+    # Perform a POST request to update the pet
+    payload = {
+        "name": new_test_data["name"],
+        "status": "pending"
+    }
+    response = post(f'/v2/pet/{bad_id}', None,
+                    {"content-type": "application/x-www-form-urlencoded"}, None,
+                    payload)
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            404,
+                            [
+                                '"code":404',
+                                '"type":"unknown"',
+                                f'"message":"not found"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+#
 # DELETE /pet/:pet_id tests
 #
 def test_delete_pet():
@@ -3333,7 +3710,7 @@ def test_delete_pet_schema():
     # Generate random pet
     test_data = create_test_pet()
 
-    # Fetch pet
+    # Delete pet
     response = delete(f'/v2/pet/{test_data["token"]}')
 
     # Validate the outcome of the test with a single assert statement
