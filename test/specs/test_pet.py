@@ -1998,9 +1998,12 @@ def test_add_pet_with_status_null():
 #
 # GET /pet/:pet_id tests
 #
-def create_test_pet():
+def create_test_pet(force_id=None, force_category_id=None, force_category=None, force_name=None,
+                    force_status=None, force_photo_urls=None, force_tags=None):
     # Generate random pet data
-    test_data = generate_random_pet_data()
+    test_data = generate_random_pet_data(pet_id=force_id, category_id=force_category_id,
+                                         category=force_category, name=force_name, status=force_status,
+                                         photo_urls=force_photo_urls, tags=force_tags)
 
     # Perform a POST request to add a new pet
     payload = {
@@ -3731,6 +3734,129 @@ def test_delete_pet_with_bad_token():
                                 '"message":"java.lang.NumberFormatException: For input string',
                                 'bad'
                             ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+#
+# GET /pet/findByStatus
+#
+def test_pet_find_by_status_available():
+    # Generate random pet
+    create_test_pet(force_status="available")
+
+    # Find pet by status
+    response = get(f'/v2/pet/findByStatus?status=available')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                '"available"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+# Skipping due to being unable to flatten the response
+# @pytest.mark.skip(reason="Skipping due to being unable to flatten the response")
+def test_pet_find_by_status_schema():
+    # Generate random pet
+    create_test_pet(force_status="for_testing")
+
+    # Find pet by status
+    response = get(f'/v2/pet/findByStatus?status=for_testing')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = schema_validation("pet", "/v2/pet/findByStatus", "GET",
+                                     response, True, True)
+    assert test_results == "No mismatch values"
+
+
+def test_pet_find_by_status_pending():
+    # Generate random pet
+    create_test_pet(force_status="pending")
+
+    # Find pet by status
+    response = get(f'/v2/pet/findByStatus?status=pending')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                '"pending"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_pet_find_by_status_sold():
+    # Generate random pet
+    create_test_pet(force_status="sold")
+
+    # Find pet by status
+    response = get(f'/v2/pet/findByStatus?status=sold')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                '"sold"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_pet_find_by_status_query_missing():
+    # Find pet by status
+    response = get(f'/v2/pet/findByStatus')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            None,
+                            [
+                                '"id"', '"name"', '"category"', '"photoUrls"', '"status"'
+                            ],
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_pet_find_by_status_query_empty_string():
+    # Find pet by status
+    response = get(f'/v2/pet/findByStatus?status=')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            None, [
+                                '"id"', '"name"', '"category"', '"photoUrls"', '"status"'
+                            ],
                             ['"Content-Type": "application/json"',
                              '"Transfer-Encoding": "chunked"',
                              '"Connection": "keep-alive"',

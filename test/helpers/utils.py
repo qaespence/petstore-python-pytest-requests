@@ -187,7 +187,7 @@ def api_logger(endpoint: str, payload: dict, headers: dict, response: str, metho
         f"\tresponse: {''.join(response.splitlines())}\n"
         "}\n"
     )
-    with open(log_file, 'a') as file:
+    with open(log_file, 'a', encoding='utf-8') as file:
         file.write(log_entry)
 
 
@@ -311,7 +311,10 @@ def schema_validation(service, endpoint, method, response=None, payload_must_mat
     if response is not None:
         try:
             body_json = response.json()
-            flattened_actual_body = FlatDict(body_json, delimiter='.')
+            if isinstance(body_json, dict):
+                flattened_actual_body = FlatDict(body_json, delimiter='.')
+            elif isinstance(body_json, list):
+                flattened_actual_body = FlatDict(body_json[0], delimiter='.')
         except ValueError:
             print("Error occurs when flattening body")
 
