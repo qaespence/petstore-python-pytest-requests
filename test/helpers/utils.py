@@ -17,6 +17,14 @@ def load_config():
     return config_data
 
 
+def random_id():
+    return random.randint(1, 10000)
+
+
+def random_array(length_range=(1, 3), element_generator=fake.url):
+    return [element_generator() for _ in range(random.randint(*length_range))]
+
+
 def generate_random_pet_data(pet_id=None, category_id=None, name=None, category=None, status=None, photo_urls=None,
                              tags=None):
     """
@@ -34,12 +42,6 @@ def generate_random_pet_data(pet_id=None, category_id=None, name=None, category=
     Returns:
     - dict: A dictionary containing the pet data in the desired format.
     """
-
-    def random_id():
-        return random.randint(1, 10000)
-
-    def random_array(length_range=(1, 3), element_generator=fake.url):
-        return [element_generator() for _ in range(random.randint(*length_range))]
 
     # Predefined lists of categories and statuses
     categories = ["Dog", "Cat", "Bird", "Fish", "Reptile"]
@@ -66,6 +68,44 @@ def generate_random_pet_data(pet_id=None, category_id=None, name=None, category=
         "photoUrls": photo_urls,
         "tags": tags,
         "status": pet_status
+    }
+
+
+def generate_random_store_order_data(order_id=None, pet_id=None, quantity=None, ship_date=None, status=None,
+                                     complete=None):
+    """
+    Generate random pet data with optional overrides using Faker for realistic random data.
+
+    Parameters:
+    - order_id (int, optional): The ID of the store order. If None, a random ID will be generated.
+    - pet_id (int, optional): The Pet ID of the store order. If None, a random ID will be generated.
+    - quantity (int, optional): The quantity of the store order. If None, a random quantity will be generated.
+    - ship_date (str, optional): The ship date of the store order. If None, a random date will be generated using Faker.
+    - status (str, optional): The status of the store order. If None, a random status will be generated.
+    - complete (boolean, optional): The complete flag for the store order. If None, random boolean will be generated using Faker.
+
+    Returns:
+    - dict: A dictionary containing the store order data in the desired format.
+    """
+
+    # Predefined lists of statuses
+    statuses = ["placed"]
+
+    # Use provided values or generate random ones using Faker
+    store_order_id = order_id if order_id is not None else random_id()
+    store_order_pet_id = pet_id if pet_id is not None else random_id()
+    store_order_quantity = quantity if quantity is not None else random.randint(1, 5)
+    store_order_ship_date = ship_date if ship_date else datetime.utcnow().isoformat()[:-3] + '+0000'
+    store_order_status = status if status else random.choice(statuses)
+    store_order_complete = complete if complete else random.choice([True, False])
+
+    return {
+        "id": store_order_id,
+        "pet_id": store_order_pet_id,
+        "quantity": store_order_quantity,
+        "ship_date": store_order_ship_date,
+        "status": store_order_status,
+        "complete": store_order_complete
     }
 
 
