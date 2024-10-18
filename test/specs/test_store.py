@@ -54,8 +54,8 @@ def test_add_store_order():
                                 f'"id":{test_data["id"]}',
                                 f'"petId":{test_data["pet_id"]}',
                                 f'"quantity":{test_data["quantity"]}',
-                                f'"shipDate":"{test_data["ship_date"]}"',
-                                f'"status":"{test_data["status"].replace("Z", "+0000")}"',
+                                f'"shipDate":"{test_data["ship_date"].replace("Z", "+0000")}"',
+                                f'"status":"{test_data["status"]}"',
                                 f'"complete":{str(test_data["complete"]).lower()}'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -128,8 +128,8 @@ def test_add_store_order_id_missing():
                             [
                                 f'"petId":{test_data["pet_id"]}',
                                 f'"quantity":{test_data["quantity"]}',
-                                f'"shipDate":"{test_data["ship_date"]}"',
-                                f'"status":"{test_data["status"].replace("Z", "+0000")}"',
+                                f'"shipDate":"{test_data["ship_date"].replace("Z", "+0000")}"',
+                                f'"status":"{test_data["status"]}"',
                                 f'"complete":{str(test_data["complete"]).lower()}'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -197,8 +197,8 @@ def test_add_store_order_id_invalid_negative_1():
                             [
                                 f'"petId":{test_data["pet_id"]}',
                                 f'"quantity":{test_data["quantity"]}',
-                                f'"shipDate":"{test_data["ship_date"]}"',
-                                f'"status":"{test_data["status"].replace("Z", "+0000")}"',
+                                f'"shipDate":"{test_data["ship_date"].replace("Z", "+0000")}"',
+                                f'"status":"{test_data["status"]}"',
                                 f'"complete":{str(test_data["complete"]).lower()}'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -235,8 +235,8 @@ def test_add_store_order_id_zero():
                             [
                                 f'"petId":{test_data["pet_id"]}',
                                 f'"quantity":{test_data["quantity"]}',
-                                f'"shipDate":"{test_data["ship_date"]}"',
-                                f'"status":"{test_data["status"].replace("Z", "+0000")}"',
+                                f'"shipDate":"{test_data["ship_date"].replace("Z", "+0000")}"',
+                                f'"status":"{test_data["status"]}"',
                                 f'"complete":{str(test_data["complete"]).lower()}'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -273,8 +273,8 @@ def test_add_store_order_id_null():
                             [
                                 f'"petId":{test_data["pet_id"]}',
                                 f'"quantity":{test_data["quantity"]}',
-                                f'"shipDate":"{test_data["ship_date"]}"',
-                                f'"status":"{test_data["status"].replace("Z", "+0000")}"',
+                                f'"shipDate":"{test_data["ship_date"].replace("Z", "+0000")}"',
+                                f'"status":"{test_data["status"]}"',
                                 f'"complete":{str(test_data["complete"]).lower()}'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -310,8 +310,8 @@ def test_add_store_order_pet_id_missing():
                             [
                                 f'"id":{test_data["id"]}',
                                 f'"quantity":{test_data["quantity"]}',
-                                f'"shipDate":"{test_data["ship_date"]}"',
-                                f'"status":"{test_data["status"].replace("Z", "+0000")}"',
+                                f'"shipDate":"{test_data["ship_date"].replace("Z", "+0000")}"',
+                                f'"status":"{test_data["status"]}"',
                                 f'"complete":{str(test_data["complete"]).lower()}'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -380,8 +380,8 @@ def test_add_store_order_pet_id_invalid_negative_1():
                                 f'"id":{test_data["id"]}',
                                 f'"petId":{test_data["pet_id"]}',
                                 f'"quantity":{test_data["quantity"]}',
-                                f'"shipDate":"{test_data["ship_date"]}"',
-                                f'"status":"{test_data["status"].replace("Z", "+0000")}"',
+                                f'"shipDate":"{test_data["ship_date"].replace("Z", "+0000")}"',
+                                f'"status":"{test_data["status"]}"',
                                 f'"complete":{str(test_data["complete"]).lower()}'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -419,8 +419,8 @@ def test_add_store_order_pet_id_zero():
                                 f'"id":{test_data["id"]}',
                                 f'"petId":{test_data["pet_id"]}',
                                 f'"quantity":{test_data["quantity"]}',
-                                f'"shipDate":"{test_data["ship_date"]}"',
-                                f'"status":"{test_data["status"].replace("Z", "+0000")}"',
+                                f'"shipDate":"{test_data["ship_date"].replace("Z", "+0000")}"',
+                                f'"status":"{test_data["status"]}"',
                                 f'"complete":{str(test_data["complete"]).lower()}'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -457,8 +457,8 @@ def test_add_store_order_pet_id_null():
                             [
                                 f'"id":{test_data["id"]}',
                                 f'"quantity":{test_data["quantity"]}',
-                                f'"shipDate":"{test_data["ship_date"]}"',
-                                f'"status":"{test_data["status"].replace("Z", "+0000")}"',
+                                f'"shipDate":"{test_data["ship_date"].replace("Z", "+0000")}"',
+                                f'"status":"{test_data["status"]}"',
                                 f'"complete":{str(test_data["complete"]).lower()}'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -495,8 +495,8 @@ def test_add_store_quantity_missing():
                                 f'"id":{test_data["id"]}',
                                 f'"petId":{test_data["pet_id"]}',
                                 f'"quantity":{test_data["quantity"]}',
-                                f'"shipDate":"{test_data["ship_date"]}"',
-                                f'"status":"{test_data["status"].replace("Z", "+0000")}"',
+                                f'"shipDate":"{test_data["ship_date"].replace("Z", "+0000")}"',
+                                f'"status":"{test_data["status"]}"',
                                 f'"complete":{str(test_data["complete"]).lower()}'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -565,8 +565,8 @@ def test_add_store_quantity_invalid_negative_1():
                                 f'"id":{test_data["id"]}',
                                 f'"petId":{test_data["pet_id"]}',
                                 f'"quantity":{test_data["quantity"]}',
-                                f'"shipDate":"{test_data["ship_date"]}"',
-                                f'"status":"{test_data["status"].replace("Z", "+0000")}"',
+                                f'"shipDate":"{test_data["ship_date"].replace("Z", "+0000")}"',
+                                f'"status":"{test_data["status"]}"',
                                 f'"complete":{str(test_data["complete"]).lower()}'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -604,8 +604,8 @@ def test_add_store_quantity_zero():
                                 f'"id":{test_data["id"]}',
                                 f'"petId":{test_data["pet_id"]}',
                                 f'"quantity":{test_data["quantity"]}',
-                                f'"shipDate":"{test_data["ship_date"]}"',
-                                f'"status":"{test_data["status"].replace("Z", "+0000")}"',
+                                f'"shipDate":"{test_data["ship_date"].replace("Z", "+0000")}"',
+                                f'"status":"{test_data["status"]}"',
                                 f'"complete":{str(test_data["complete"]).lower()}'
                             ], None,
                             ['"Content-Type": "application/json"',
@@ -643,7 +643,151 @@ def test_add_store_quantity_null():
                                 f'"id":{test_data["id"]}',
                                 f'"petId":{test_data["pet_id"]}',
                                 f'"quantity":{test_data["quantity"]}',
-                                f'"shipDate":"{test_data["ship_date"]}"',
+                                f'"shipDate":"{test_data["ship_date"].replace("Z", "+0000")}"',
+                                f'"status":"{test_data["status"]}"',
+                                f'"complete":{str(test_data["complete"]).lower()}'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_store_order_with_ship_date_missing():
+    # Generate random order data
+    test_data = generate_random_store_order_data()
+
+    # Perform a POST request to add a new order
+    payload = {
+        "id": test_data["id"],
+        "petId": test_data["pet_id"],
+        "quantity": test_data["quantity"],
+        "status": test_data["status"],
+        "complete": test_data["complete"]
+    }
+    response = post("/v2/store/order", payload, {"content-type": "application/json"})
+    order = json.loads(response.text)
+
+    # Store the created pet ID for cleanup
+    created_order_ids.append(order['id'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{test_data["id"]}',
+                                f'"petId":{test_data["pet_id"]}',
+                                f'"quantity":{test_data["quantity"]}',
+                                f'"status":"{test_data["status"]}"',
+                                f'"complete":{str(test_data["complete"]).lower()}'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_store_order_with_ship_date_not_a_date():
+    # Generate random order data
+    test_data = generate_random_store_order_data(ship_date="not-a-date")
+
+    # Perform a POST request to add a new order
+    payload = {
+        "id": test_data["id"],
+        "petId": test_data["pet_id"],
+        "quantity": test_data["quantity"],
+        "shipDate": test_data["ship_date"],
+        "status": test_data["status"],
+        "complete": test_data["complete"]
+    }
+    response = post("/v2/store/order", payload, {"content-type": "application/json"})
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            500,
+                            [
+                                '"code":500', '"type":"unknown"',
+                                '"message":"something bad happened"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_store_order_with_ship_date_invalid_data_type():
+    # Generate random order data
+    test_data = generate_random_store_order_data(ship_date=123)
+
+    # Perform a POST request to add a new order
+    payload = {
+        "id": test_data["id"],
+        "petId": test_data["pet_id"],
+        "quantity": test_data["quantity"],
+        "shipDate": test_data["ship_date"],
+        "status": test_data["status"],
+        "complete": test_data["complete"]
+    }
+    response = post("/v2/store/order", payload, {"content-type": "application/json"})
+    order = json.loads(response.text)
+
+    # Store the created pet ID for cleanup
+    created_order_ids.append(order['id'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{test_data["id"]}',
+                                f'"petId":{test_data["pet_id"]}',
+                                f'"quantity":{test_data["quantity"]}',
+                                f'"shipDate":"1970-01-01T00:00:00.123+0000"',
+                                f'"status":"{test_data["status"]}"',
+                                f'"complete":{str(test_data["complete"]).lower()}'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_store_order_with_ship_date_null():
+    # Generate random order data
+    test_data = generate_random_store_order_data(ship_date=None)
+
+    # Perform a POST request to add a new order
+    payload = {
+        "id": test_data["id"],
+        "petId": test_data["pet_id"],
+        "quantity": test_data["quantity"],
+        "status": test_data["status"],
+        "complete": test_data["complete"]
+    }
+    response = post("/v2/store/order", payload, {"content-type": "application/json"})
+    order = json.loads(response.text)
+
+    # Store the created pet ID for cleanup
+    created_order_ids.append(order['id'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{test_data["id"]}',
+                                f'"petId":{test_data["pet_id"]}',
+                                f'"quantity":{test_data["quantity"]}',
                                 f'"status":"{test_data["status"].replace("Z", "+0000")}"',
                                 f'"complete":{str(test_data["complete"]).lower()}'
                             ], None,
