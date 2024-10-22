@@ -992,6 +992,191 @@ def test_add_store_order_with_status_null():
     assert test_results == "No mismatch values"
 
 
+def test_add_store_order_with_complete_false():
+    # Generate random order data
+    test_data = generate_random_store_order_data(complete=False)
+
+    # Perform a POST request to add a new order
+    payload = {
+        "id": test_data["id"],
+        "petId": test_data["pet_id"],
+        "quantity": test_data["quantity"],
+        "shipDate": test_data["ship_date"],
+        "status": test_data["status"],
+        "complete": test_data["complete"]
+    }
+    response = post("/v2/store/order", payload, {"content-type": "application/json"})
+    order = json.loads(response.text)
+
+    # Store the created pet ID for cleanup
+    created_order_ids.append(order['id'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{test_data["id"]}',
+                                f'"petId":{test_data["pet_id"]}',
+                                f'"quantity":{test_data["quantity"]}',
+                                f'"shipDate":"{test_data["ship_date"].replace("Z", "+0000")}"',
+                                f'"status":"{test_data["status"]}"',
+                                f'"complete":{str(test_data["complete"]).lower()}'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_store_order_with_complete_true():
+    # Generate random order data
+    test_data = generate_random_store_order_data(complete=True)
+
+    # Perform a POST request to add a new order
+    payload = {
+        "id": test_data["id"],
+        "petId": test_data["pet_id"],
+        "quantity": test_data["quantity"],
+        "shipDate": test_data["ship_date"],
+        "status": test_data["status"],
+        "complete": test_data["complete"]
+    }
+    response = post("/v2/store/order", payload, {"content-type": "application/json"})
+    order = json.loads(response.text)
+
+    # Store the created pet ID for cleanup
+    created_order_ids.append(order['id'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{test_data["id"]}',
+                                f'"petId":{test_data["pet_id"]}',
+                                f'"quantity":{test_data["quantity"]}',
+                                f'"shipDate":"{test_data["ship_date"].replace("Z", "+0000")}"',
+                                f'"status":"{test_data["status"]}"',
+                                f'"complete":{str(test_data["complete"]).lower()}'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_store_order_with_complete_unsupported():
+    # Generate random order data
+    test_data = generate_random_store_order_data(complete="unsupported")
+
+    # Perform a POST request to add a new order
+    payload = {
+        "id": test_data["id"],
+        "petId": test_data["pet_id"],
+        "quantity": test_data["quantity"],
+        "shipDate": test_data["ship_date"],
+        "status": test_data["status"],
+        "complete": test_data["complete"]
+    }
+    response = post("/v2/store/order", payload, {"content-type": "application/json"})
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            500,
+                            [
+                                '"code":500', '"type":"unknown"',
+                                '"message":"something bad happened"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_store_order_with_complete_missing():
+    # Generate random order data
+    test_data = generate_random_store_order_data()
+
+    # Perform a POST request to add a new order
+    payload = {
+        "id": test_data["id"],
+        "petId": test_data["pet_id"],
+        "quantity": test_data["quantity"],
+        "shipDate": test_data["ship_date"],
+        "status": test_data["status"]
+    }
+    response = post("/v2/store/order", payload, {"content-type": "application/json"})
+    order = json.loads(response.text)
+
+    # Store the created pet ID for cleanup
+    created_order_ids.append(order['id'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{test_data["id"]}',
+                                f'"petId":{test_data["pet_id"]}',
+                                f'"quantity":{test_data["quantity"]}',
+                                f'"shipDate":"{test_data["ship_date"].replace("Z", "+0000")}"',
+                                f'"status":"{test_data["status"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_store_order_with_complete_null():
+    # Generate random order data
+    test_data = generate_random_store_order_data(complete=None)
+
+    # Perform a POST request to add a new order
+    payload = {
+        "id": test_data["id"],
+        "petId": test_data["pet_id"],
+        "quantity": test_data["quantity"],
+        "shipDate": test_data["ship_date"],
+        "status": test_data["status"],
+        "complete": test_data["complete"]
+    }
+    response = post("/v2/store/order", payload, {"content-type": "application/json"})
+    order = json.loads(response.text)
+
+    # Store the created pet ID for cleanup
+    created_order_ids.append(order['id'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{test_data["id"]}',
+                                f'"petId":{test_data["pet_id"]}',
+                                f'"quantity":{test_data["quantity"]}',
+                                f'"shipDate":"{test_data["ship_date"].replace("Z", "+0000")}"',
+                                f'"status":"{test_data["status"]}"',
+                                f'"complete":{str(test_data["complete"]).lower()}'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
 #
 # Order Clean-up
 #
