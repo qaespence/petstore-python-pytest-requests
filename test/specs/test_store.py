@@ -1,6 +1,6 @@
 from test.helpers.utils import (generate_random_store_order_data, set_debug_file_name,
                                 api_test, clear_log_file, schema_validation, string_gen)
-from test.api.basic_requests import post, delete
+from test.api.basic_requests import post, delete, get
 import json
 
 created_order_ids = []
@@ -1167,6 +1167,94 @@ def test_add_store_order_with_complete_null():
                                 f'"shipDate":"{test_data["ship_date"].replace("Z", "+0000")}"',
                                 f'"status":"{test_data["status"]}"',
                                 f'"complete":{str(test_data["complete"]).lower()}'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+#
+# GET /store/order/:orderId tests
+#
+def create_test_order(force_id=None, force_pet_id=None, force_quantity=None,
+                      force_ship_date=None, force_status=None, force_complete=None):
+    # Generate random pet data
+    test_data = generate_random_store_order_data(order_id=force_id, pet_id=force_pet_id,
+                                                 quantity=force_quantity, ship_date = force_ship_date,
+                                                 status=force_status, complete=force_complete)
+
+    # Perform a POST request to add a new order
+    payload = {
+        "id": test_data["id"],
+        "petId": test_data["pet_id"],
+        "quantity": test_data["quantity"],
+        "shipDate": test_data["ship_date"],
+        "status": test_data["status"],
+        "complete": test_data["complete"]
+    }
+    response = post("/v2/store/order", payload, {"content-type": "application/json"})
+    order = json.loads(response.text)
+
+    # Store the created pet ID for cleanup
+    created_order_ids.append(order['id'])
+
+    test_data["token"] = order['id']
+
+    return test_data
+
+
+def test_fetch_store_order():
+    # Generate random order
+    test_data = create_test_order()
+
+    response = get(f'/v2/store/order/{test_data["token"]}')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                f'"id":{test_data["id"]}',
+                                f'"petId":{test_data["pet_id"]}',
+                                f'"quantity":{test_data["quantity"]}',
+                                f'"shipDate":"{test_data["ship_date"].replace("Z", "+0000")}"',
+                                f'"status":"{test_data["status"]}"',
+                                f'"complete":{str(test_data["complete"]).lower()}'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_fetch_store_order_schema():
+    # Generate random order
+    test_data = create_test_order()
+
+    response = get(f'/v2/store/order/{test_data["token"]}')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = schema_validation("store", "/v2/store/order/:orderId", "GET",
+                                     response, True, True)
+    assert test_results == "No mismatch values"
+
+
+def test_fetch_store_order_with_bad_token():
+    response = get(f'/v2/store/order/bad')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            404,
+                            [
+                                '"type":"unknown"',
+                                '"message":"java.lang.NumberFormatException: For input string',
+                                'bad'
                             ], None,
                             ['"Content-Type": "application/json"',
                              '"Transfer-Encoding": "chunked"',

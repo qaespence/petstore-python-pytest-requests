@@ -147,6 +147,28 @@
                     "Server": "str"
                 }
             }
+        },
+        "/v2/store/order/:orderId": {
+            "GET": {
+                "body": {
+                    "id": "int",
+                    "petId": "int",
+                    "quantity": "int",
+                    "shipDate": "str",
+                    "status": "str",
+                    "complete": "bool"
+                },
+                "headers": {
+                    "Date": "str",
+                    "Content-Type": "str",
+                    "Transfer-Encoding": "str",
+                    "Connection": "str",
+                    "Access-Control-Allow-Origin": "str",
+                    "Access-Control-Allow-Methods": "str",
+                    "Access-Control-Allow-Headers": "str",
+                    "Server": "str"
+                }
+            }
         }
     }
 }
