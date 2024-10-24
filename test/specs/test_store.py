@@ -1266,6 +1266,42 @@ def test_fetch_store_order_with_bad_token():
 
 
 #
+# GET /store/order/:orderId tests
+#
+def test_fetch_store_inventory():
+    # Generate random order
+    create_test_order()
+
+    response = get('/v2/store/inventory')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                '"available', '"pending"', '"sold"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_fetch_store_inventory_schema():
+    # Generate random order
+    create_test_order()
+
+    response = get('/v2/store/inventory')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = schema_validation("store", "/v2/store/inventory", "GET",
+                                     response, False, True)
+    assert test_results == "No mismatch values"
+
+
+#
 # Order Clean-up
 #
 def test_cleanup_created_order():

@@ -169,6 +169,25 @@
                     "Server": "str"
                 }
             }
+        },
+        "/v2/store/inventory": {
+            "GET": {
+                "body": {
+                    "available": "int",
+                    "pending": "int",
+                    "sold": "int"
+                },
+                "headers": {
+                    "Date": "str",
+                    "Content-Type": "str",
+                    "Transfer-Encoding": "str",
+                    "Connection": "str",
+                    "Access-Control-Allow-Origin": "str",
+                    "Access-Control-Allow-Methods": "str",
+                    "Access-Control-Allow-Headers": "str",
+                    "Server": "str"
+                }
+            }
         }
     }
 }
