@@ -1302,6 +1302,64 @@ def test_fetch_store_inventory_schema():
 
 
 #
+# DELETE /store/order/:orderId tests
+#
+def test_delete_store_order():
+    # Generate random order
+    test_data = create_test_order()
+
+    response = delete(f'/v2/store/order/{test_data["token"]}')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                '"code":200',
+                                '"type":"unknown"',
+                                f'"message":"{test_data["token"]}"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_delete_store_order_schema():
+    # Generate random order
+    test_data = create_test_order()
+
+    response = delete(f'/v2/store/order/{test_data["token"]}')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = schema_validation("store", "/v2/store/order/:orderId", "DELETE",
+                                     response, True, True)
+    assert test_results == "No mismatch values"
+
+
+def test_delete_store_order_with_bad_token():
+    response = delete(f'/v2/store/order/bad')
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            404,
+                            [
+                                '"type":"unknown"',
+                                '"message":"java.lang.NumberFormatException: For input string',
+                                'bad'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+#
 # Order Clean-up
 #
 def test_cleanup_created_order():
