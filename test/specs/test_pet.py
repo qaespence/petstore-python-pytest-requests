@@ -27,7 +27,7 @@ def test_add_pet():
         - Retrieve the JSON response and HTTP status code.
 
         Expected Outcome:
-        - The status code should be 201, indicating a successful addition.
+        - The status code should be 200, indicating a successful addition.
         - The response JSON should contain the added pet's information.
         - The added pet's name, category, and status should match the generated data.
         - Cleanup: The added pet ID is stored for later removal.

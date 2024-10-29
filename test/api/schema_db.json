@@ -206,5 +206,26 @@
                 }
             }
         }
+    },
+    "user": {
+        "/v2/user": {
+            "POST": {
+                "body": {
+                    "code": "int",
+                    "type": "str",
+                    "message": "str"
+                },
+                "headers": {
+                    "Date": "str",
+                    "Content-Type": "str",
+                    "Transfer-Encoding": "str",
+                    "Connection": "str",
+                    "Access-Control-Allow-Origin": "str",
+                    "Access-Control-Allow-Methods": "str",
+                    "Access-Control-Allow-Headers": "str",
+                    "Server": "str"
+                }
+            }
+        }
     }
 }

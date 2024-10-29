@@ -24,7 +24,7 @@ def test_add_store_order():
         - Retrieve the JSON response and HTTP status code.
 
         Expected Outcome:
-        - The status code should be 201, indicating a successful addition.
+        - The status code should be 200, indicating a successful addition.
         - The response JSON should contain the added store order's information.
         - The added store order data should match the generated data.
         - Cleanup: The added order ID is stored for later removal.

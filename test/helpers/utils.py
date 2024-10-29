@@ -109,6 +109,50 @@ def generate_random_store_order_data(order_id=None, pet_id=None, quantity=None, 
     }
 
 
+def generate_random_user_data(user_id=None, username=None, first_name=None, last_name=None, email=None,
+                              password=None, phone=None, user_status=None):
+    """
+    Generate random pet data with optional overrides using Faker for realistic random data.
+
+    Parameters:
+    - user_id (int, optional): The ID of the user. If None, a random ID will be generated.
+    - username (str, optional): The username of the user. If None, a random username will be generated.
+    - first_name (str, optional): The first name of the user. If None, a random first name will be generated.
+    - last_name (str, optional): The last name of the user. If None, a random last name will be generated.
+    - email (str, optional): The email of the user. If None, a random email will be generated.
+    - password (str, optional): The password of the user. If None, a random password will be generated.
+    - phone (str, optional): The phone of the user. If None, a random phone will be generated.
+    - user_status (int, optional): The user status of the user. If None, 0 is the default.
+
+    Returns:
+    - dict: A dictionary containing the user data in the desired format.
+    """
+
+    random_first_name = fake.first_name()
+    random_last_name = fake.last_name()
+
+    # Use provided values or generate random ones using Faker
+    random_user_id = user_id if user_id is not None else random_id()
+    user_username = username if username is not None else random_first_name[0]+random_last_name
+    user_first_name = first_name if first_name is not None else random_first_name
+    user_last_name = last_name if last_name is not None else random_last_name
+    user_email = email if email is not None else fake.email(domain="test.com")
+    user_password = password if password else fake.password(length=12, special_chars=True, upper_case=True)
+    user_phone = phone if phone else fake.phone_number()
+    user_user_status = user_status if user_status else 0
+
+    return {
+        "id": random_user_id,
+        "username": user_username,
+        "first_name": user_first_name,
+        "last_name": user_last_name,
+        "email": user_email,
+        "password": user_password,
+        "phone": user_phone,
+        "user_status": user_user_status
+    }
+
+
 def verify_status_code(expected_status_code, actual_status_code):
     if expected_status_code == actual_status_code:
         return None
