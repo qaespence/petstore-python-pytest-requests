@@ -103,6 +103,190 @@ def test_add_user_schema():
     assert test_results == "No mismatch values"
 
 
+def test_add_user_with_id_missing():
+    # Generate random order data
+    test_data = generate_random_user_data()
+
+    # Perform a POST request to add a new order
+    payload = {
+        "username": test_data["username"],
+        "firstName": test_data["first_name"],
+        "lastName": test_data["last_name"],
+        "email": test_data["email"],
+        "password": test_data["password"],
+        "phone": test_data["phone"],
+        "userStatus": test_data["user_status"]
+    }
+    response = post("/v2/user", payload, {"content-type": "application/json"})
+
+    # Store the created pet ID for cleanup
+    created_user_names.append(test_data['username'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                '"code":200',
+                                '"type":"unknown"',
+                                '"message"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_user_with_id_invalid_data_type():
+    # Generate random order data
+    test_data = generate_random_user_data()
+
+    # Perform a POST request to add a new order
+    payload = {
+        "id": "bad",
+        "username": test_data["username"],
+        "firstName": test_data["first_name"],
+        "lastName": test_data["last_name"],
+        "email": test_data["email"],
+        "password": test_data["password"],
+        "phone": test_data["phone"],
+        "userStatus": test_data["user_status"]
+    }
+    response = post("/v2/user", payload, {"content-type": "application/json"})
+
+    # Store the created pet ID for cleanup
+    created_user_names.append(test_data['username'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            500,
+                            [
+                                '"code":500',
+                                '"type":"unknown"',
+                                '"message":"something bad happened"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_user_with_id_invalid_negative_1():
+    # Generate random order data
+    test_data = generate_random_user_data()
+
+    # Perform a POST request to add a new order
+    payload = {
+        "id": -1,
+        "username": test_data["username"],
+        "firstName": test_data["first_name"],
+        "lastName": test_data["last_name"],
+        "email": test_data["email"],
+        "password": test_data["password"],
+        "phone": test_data["phone"],
+        "userStatus": test_data["user_status"]
+    }
+    response = post("/v2/user", payload, {"content-type": "application/json"})
+
+    # Store the created pet ID for cleanup
+    created_user_names.append(test_data['username'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                '"code":200',
+                                '"type":"unknown"',
+                                '"message"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_user_with_id_invalid_0():
+    # Generate random order data
+    test_data = generate_random_user_data()
+
+    # Perform a POST request to add a new order
+    payload = {
+        "id": 0,
+        "username": test_data["username"],
+        "firstName": test_data["first_name"],
+        "lastName": test_data["last_name"],
+        "email": test_data["email"],
+        "password": test_data["password"],
+        "phone": test_data["phone"],
+        "userStatus": test_data["user_status"]
+    }
+    response = post("/v2/user", payload, {"content-type": "application/json"})
+
+    # Store the created pet ID for cleanup
+    created_user_names.append(test_data['username'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                '"code":200',
+                                '"type":"unknown"',
+                                '"message"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
+def test_add_user_with_id_invalid_null():
+    # Generate random order data
+    test_data = generate_random_user_data()
+
+    # Perform a POST request to add a new order
+    payload = {
+        "id": None,
+        "username": test_data["username"],
+        "firstName": test_data["first_name"],
+        "lastName": test_data["last_name"],
+        "email": test_data["email"],
+        "password": test_data["password"],
+        "phone": test_data["phone"],
+        "userStatus": test_data["user_status"]
+    }
+    response = post("/v2/user", payload, {"content-type": "application/json"})
+
+    # Store the created pet ID for cleanup
+    created_user_names.append(test_data['username'])
+
+    # Validate the outcome of the test with a single assert statement
+    test_results = api_test(response, response.status_code,
+                            200,
+                            [
+                                '"code":200',
+                                '"type":"unknown"',
+                                '"message"'
+                            ], None,
+                            ['"Content-Type": "application/json"',
+                             '"Transfer-Encoding": "chunked"',
+                             '"Connection": "keep-alive"',
+                             '"Access-Control-Allow-Origin": "*"',
+                             '"Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"',
+                             '"Access-Control-Allow-Headers": "Content-Type, api_key, Authorization"'])
+    assert test_results == "No mismatch values"
+
+
 #
 # User Clean-up
 #
